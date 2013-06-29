@@ -1,0 +1,3 @@
+class ServerTime:
+
+    time = None
