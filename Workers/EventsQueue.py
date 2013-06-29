@@ -1,9 +1,8 @@
 from Queue import Queue
 from threading import Event, Thread
+from peak.api import binding
 
-__author__ = 'antonlagankin'
-
-class AsynchEventsQueue :
+class AsynchEventsQueue(binding.Component):
 
     def __init__(self):
         self.__queueNotEmptyEvent = Event()
@@ -24,6 +23,6 @@ class AsynchEventsQueue :
         self.__queueNotEmptyEvent.set()
 
     def start(self):
-        t = Thread(target = self.process, args = (self))
+        t = Thread(target = self.process)
         t.daemon = True
         t.start()
