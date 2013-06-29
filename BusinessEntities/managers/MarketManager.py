@@ -1,0 +1,2 @@
+class MarketManager:
+    pass
