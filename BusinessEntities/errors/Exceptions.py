@@ -1,0 +1,2 @@
+class ObjectCreationDisabled(Exception):
+    pass
