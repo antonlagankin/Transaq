@@ -3,7 +3,7 @@ import ctypes
 from lxml import etree
 from Commands import RequestResult
 from dll.factories.DomainObjectFatories import parseInputXml
-from Decorators import serverFunction
+# from Decorators import serverFunction
 
 CALLBACKFUNC = WINFUNCTYPE(ctypes.c_bool, POINTER(ctypes.c_byte))
 
@@ -33,7 +33,7 @@ def setLogLevel(logLevel):
 def testCallback():
     __hllDll.SetCallback(callback)
 
-@serverFunction
+# @serverFunction
 def buyAtMarket():
     print 'buyAtMarket'
     return None

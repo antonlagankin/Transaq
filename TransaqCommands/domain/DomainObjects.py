@@ -2,8 +2,8 @@ from lxml import etree
 from domain.Decorators import Registrable, MapsWithTag, AttributesInXml, ToBusinessEntityConverter, ValueInXmlToPropertyName, MapsWithTags
 from domain.converters.business import toSecurity, toMarket, toTrade
 from domain.mappers.TagToDomainMap import getMappedDomainType
-from messaging.Channels import Channels
-from messaging.Publisher import Publisher
+# from messaging.Channels import Channels
+# from messaging.Publisher import Publisher
 
 def tryToPublish(publisher, itemToPublish):
     if hasattr(publisher, 'publish'):
@@ -254,17 +254,17 @@ class SimpleDomainObjectsList(DomainObjectsListBase):
     pass
 
 @MapsWithTag('securities')
-@Publisher(Channels.SECURITIES)
+# @Publisher(Channels.SECURITIES)
 class SecuritiesDomainObjectsList(DomainObjectsListBase):
     pass
 
 @MapsWithTag('quotes')
-@Publisher(Channels.QUOTES)
+# @Publisher(Channels.QUOTES)
 class QuotesDomainObjectsList(DomainObjectsListBase):
     pass
 
 @MapsWithTag('alltrades')
-@Publisher(Channels.TRADES)
+# @Publisher(Channels.TRADES)
 class TradesDomainObjectsList(DomainObjectsListBase):
     pass
 

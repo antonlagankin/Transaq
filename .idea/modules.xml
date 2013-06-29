@@ -5,7 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/BusinessEntities/BusinessEntities.iml" filepath="$PROJECT_DIR$/BusinessEntities/BusinessEntities.iml" />
       <module fileurl="file://$PROJECT_DIR$/Events/Events.iml" filepath="$PROJECT_DIR$/Events/Events.iml" />
       <module fileurl="file://$PROJECT_DIR$/Indicators/Indicators.iml" filepath="$PROJECT_DIR$/Indicators/Indicators.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Launcher/Launcher.iml" filepath="$PROJECT_DIR$/Launcher/Launcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Launcher/Launcher.iml" filepath="$PROJECT_DIR$/Launcher/Launcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services/Services.iml" filepath="$PROJECT_DIR$/Services/Services.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tests/Tests.iml" filepath="$PROJECT_DIR$/Tests/Tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TransaqCommands/TransaqCommands.iml" filepath="$PROJECT_DIR$/TransaqCommands/TransaqCommands.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Utilities/Utilities.iml" filepath="$PROJECT_DIR$/Utilities/Utilities.iml" />
       <module fileurl="file://$PROJECT_DIR$/Workers/Workers.iml" filepath="$PROJECT_DIR$/Workers/Workers.iml" />
     </modules>
   </component>
