@@ -78,7 +78,7 @@ def buyAtMarket():
 @CALLBACKFUNC
 def callback(data):
     stringRes = cast(data, c_char_p).value
-    print stringRes
+    # print stringRes
     parsedDomainObjectsList = parseInputXml(etree.XML(stringRes))
     # print parsedDomainObjectsList
     return True

@@ -7,6 +7,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Events" />
     <orderEntry type="module" module-name="Workers" />
+    <orderEntry type="module" module-name="TransaqCommands" />
   </component>
 </module>
 

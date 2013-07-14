@@ -1,13 +1,7 @@
 from datetime import datetime, timedelta
 from entities.Candle import CandleInterval, Candle
-# from messaging.Channels import Channels
-# from messaging.Consumer import consumer
-# from messaging.Publisher import Publisher
 
-#TODO candles with length more than one hour are not correctly generated
-# @consumer(Channels.TRADES)
-# @Publisher(Channels.CANDLES_FINISHED)
-class JapaneseCandleService:
+class JapaneseCandleService():
 
     def __init__(self):
         # @consumer(Channels.TIME)

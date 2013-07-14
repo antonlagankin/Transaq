@@ -1,7 +1,9 @@
-from domain.DomainObjects import SecurityDomainObject, ServerStatus, OvernightStatus, CandleKind, Market, Client, MoneyPosition, SecurityPosition, Quote, Trade, parseDomainObjectsList, parse
 import logging
 
 # __parsers = {}
+# from domain.Parser import parse
+from domain.Parser import parse
+
 __logger = logging.getLogger('Transaq.DomainObjectFactories')
 
 # def parseItemsList(reportAction = lambda list, queue : None, exchangeName = None):

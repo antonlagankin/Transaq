@@ -1,42 +1,19 @@
 from lxml import etree
+from Trades.TradesService import TradesService
+# from configuration.cfg import Configuration, registerAsComponent
+# from configuration.decorators import PushInService
 from domain.Decorators import Registrable, MapsWithTag, AttributesInXml, ToBusinessEntityConverter, ValueInXmlToPropertyName, MapsWithTags
+# from domain.Parser import tryToPublish
+import Parser
 from domain.converters.business import toSecurity, toMarket, toTrade
 from domain.mappers.TagToDomainMap import getMappedDomainType
-# from messaging.Channels import Channels
-# from messaging.Publisher import Publisher
-
-def tryToPublish(publisher, itemToPublish):
-    if hasattr(publisher, 'publish'):
-        publisher.publish(itemToPublish)
-
-def parseXml(self, element):
-    self.__fillDomainObject(element)
-    if hasattr(self, 'xmlAttributes'):
-        for property in self.xmlAttributes:
-            setattr(self, property, element.get(property))
-    if hasattr(self, 'valuePropertyName') and self.valuePropertyName is not None:
-        setattr(self, self.valuePropertyName, element.text)
-    if hasattr(self, 'register'):
-        self.register()
-    converted = None
-    if hasattr(self, 'converter'):
-        print 'converter:', self.converter
-        converted = self.converter()
-        tryToPublish(self, converted)
-    return converted if converted is not None else self
-
-def fillDomainObject(self, element):
-    childIterator = etree.ElementChildIterator(element)
-    fieldsToFill = dir(self)
-    for item in childIterator:
-        if item.tag in fieldsToFill:
-            setattr(self, item.tag, item.text)
+from pinsor import LifeStyle
 
 class DomainObjectMeta(type):
 
     def __new__(meta, classname, supers, classdict):
-        classdict['__fillDomainObject'] = fillDomainObject
-        classdict['parseXml'] = parseXml
+        classdict['__fillDomainObject'] = Parser.fillDomainObject
+        classdict['parseXml'] = Parser.parseXml
         return type.__new__(meta, classname, supers, classdict)
 
 class DomainObjectBase(object):
@@ -126,7 +103,7 @@ class Market(DomainObjectBase):
     name = ''
 
     def __hash__(self):
-        return int(self.id)#id * 31 + self.__hash__();
+        return int(self.id)
 
     def __eq__(self, other):
         return self.id == other.id and self.name == other.name
@@ -191,6 +168,7 @@ class Quote(DomainObjectBase):
     def __dir__(self):
         return ['price', 'buy', 'sell']
 
+# @PushInService(TradesService)
 @MapsWithTag('trade')
 @AttributesInXml('secid')
 @ToBusinessEntityConverter(toTrade)
@@ -212,37 +190,29 @@ class Trade(DomainObjectBase):
     def __str__(self):
         return 'Trade===== : ' + str(self.price)
 
-def parse(element):
-    t = getMappedDomainType(element.tag)
-    if t is None:
-        return None
-    item = t()
-    result = item.parseXml(element)
-    return result
-
-def parseDomainObjectsList(self, element):
-    childIterator = etree.ElementChildIterator(element)
-    list = []
-    for item in childIterator:
-        list.append(parseSingleItem(item))
-    tryToPublish(self, list)
-    return list
-
-def parseSingleItem(element):
-    print element.tag
-    t = getMappedDomainType(element.tag)
-    print 'parsing', t
-    if t is None:
-        return None
-    item = t()
-    print 'created item:', item
-    converted = item.parseXml(element)
-    return converted
+# def parseDomainObjectsList(self, element):
+#     childIterator = etree.ElementChildIterator(element)
+#     list = []
+#     for item in childIterator:
+#         list.append(parseSingleItem(item))
+#     tryToPublish(self, list)
+#     return list
+#
+# def parseSingleItem(element):
+#     print element.tag
+#     t = getMappedDomainType(element.tag)
+#     print 'parsing', t
+#     if t is None:
+#         return None
+#     item = cfg.cfg.Configuration().getObject(t)#t()
+#     print 'created item:', item
+#     converted = item.parseXml(element)
+#     return converted
 
 class DomainObjectsListMeta(type):
 
     def __new__(meta, classname, supers, classdict):
-        classdict['parseXml'] = parseDomainObjectsList
+        classdict['parseXml'] = Parser.parseDomainObjectsList
         return type.__new__(meta, classname, supers, classdict)
 
 class DomainObjectsListBase(object):
@@ -263,8 +233,8 @@ class SecuritiesDomainObjectsList(DomainObjectsListBase):
 class QuotesDomainObjectsList(DomainObjectsListBase):
     pass
 
+# @PushInService(TradesService)
 @MapsWithTag('alltrades')
 # @Publisher(Channels.TRADES)
 class TradesDomainObjectsList(DomainObjectsListBase):
     pass
-
